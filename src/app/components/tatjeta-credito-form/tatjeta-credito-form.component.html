@@ -1,61 +1,59 @@
-<div class="font-bold text-center mx-auto mt-8 bg-white p-4 max-w-2xl rounded-lg shadow-md border-2 shadow-gray-600">
+<div class="text-center mt-8 p-4 rounded-md shadow-sm shadow-gray-500">
     <h1 class="text-2xl text-gray-800 font-semibold my-4">Add Credit Card</h1>
 
-    <form [formGroup]="form" (ngSubmit)="agregarTarjeta()">
+    <form type="submit" (ngSubmit)="onSubmit(formCard)" #formCard="ngForm">
         <div class="flex items-center p-2 text-md">
             <i class="fas fa-user" [ngClass]="{
-                'text-green-600':this.form.get('titular')?.valid,
-                'text-red-600':this.form.get('titular')?.invalid && this.form.get('titular')?.touched     
+                'text-green-700':titular.valid,
+                'text-red-600':!titular.valid && titular.touched     
             }"></i>
-            <input formControlName="titular" type="text"
-                class="bg-gray-300 outline-none w-full rounded-lg ml-4 p-1 text-black ring-1" placeholder="Nombre"
+            <input type="text" ngModel="Cristian Camilo" name="titular" #titular="ngModel" required minlength="5"
+                class="outline-none w-full rounded-sm ml-4 p-1 text-black ring-2 border-l-8" placeholder="Nombre"
                 [ngClass]="{
-                            'ring-green-600':this.form.get('titular')?.valid,
-                            'ring-red-600':this.form.get('titular')?.invalid && this.form.get('titular')?.touched
+                    'border-green-700':titular.valid,
+                    'border-red-600':!titular.valid && titular.touched
                         }">
         </div>
         <div class="flex p-2 items-center text-md">
             <i class="fas fa-credit-card" [ngClass]="{
-                        'text-green-600':this.form.get('numeroTarjeta')?.valid,
-                        
-                        'text-red-600':this.form.get('numeroTarjeta')?.invalid && this.form.get('titular')?.touched     
+                'text-green-700':numberCard.valid,
+                'text-red-600':!numberCard.valid && numberCard.touched     
                     }"></i>
-            <input formControlName="numeroTarjeta" type="text" maxlength="6"
-                class="bg-gray-300 outline-none w-full rounded-lg ml-4 p-1 text-black ring-1"
+            <input type="text" ngModel="12345" name="numberCard" #numberCard="ngModel" required minlength="5" maxlength="5"
+                class="outline-none w-full rounded-sm ml-4 p-1 text-black ring-2 border-l-8"
                 placeholder="Numero Tarjeta" [ngClass]="{
-                            'ring-green-600':this.form.get('numeroTarjeta')?.valid,
-                            'ring-red-600':this.form.get('numeroTarjeta')?.invalid && this.form.get('titular')?.touched
+                    'border-green-700':numberCard.valid,
+                    'border-red-600':!numberCard.valid && numberCard.touched
                         }">
         </div>
         <div class="flex p-2 items-center text-md ">
             <i class="fas fa-calendar-alt" [ngClass]="{
-                        'text-green-600':this.form.get('fechaExpedicion')?.valid,
-                      
-                        'text-red-600':this.form.get('fechaExpedicion')?.invalid && this.form.get('titular')?.touched     
+                'text-green-700':fechaExpedicion.valid,
+                'text-red-600':!fechaExpedicion.valid && fechaExpedicion.touched     
                     }"></i>
-            <input formControlName="fechaExpedicion" type="date" name="fechaExpedicion" id="fechaExpedicion"
-                class="bg-gray-300 outline-none w-full rounded-lg ml-4 p-1 text-black ring-1" [ngClass]="{
-                            'ring-green-600':this.form.get('fechaExpedicion')?.valid,
-                            'ring-red-600':this.form.get('fechaExpedicion')?.invalid && this.form.get('titular')?.touched
+            <input type="text" ngModel="13/06/1995" name="fechaExpedicion" #fechaExpedicion="ngModel" required maxlength="10" minlength="10"
+                class="outline-none w-full rounded-sm ml-4 p-1 text-black ring-2 border-l-8" 
+                placeholder="Fecha Expedicion" [ngClass]="{
+                    'border-green-700':fechaExpedicion.valid,
+                    'border-red-600':!fechaExpedicion.valid && fechaExpedicion.touched
                         }">
         </div>
         <div class="flex p-2 items-center text-md ">
             <i class="fas fa-key" [ngClass]="{
-                        'text-green-600':this.form.get('cvv')?.valid,
-                    
-                        'text-red-600':this.form.get('cvv')?.invalid && this.form.get('titular')?.touched     
+                'text-green-700':cvvPassword.valid,
+                'text-red-600':!cvvPassword.valid && cvvPassword.touched    
                     }"></i>
-            <input formControlName="cvv" type="password" name="cvv" id="cvv" maxlength="3"
-                class="bg-gray-300 outline-none w-full rounded-lg ml-4 p-1 text-black ring-1" placeholder="Numero Cvv"
+            <input type="password" ngModel="123" name="cvvPassword" #cvvPassword="ngModel" required maxlength="3" minlength="3"
+                class="outline-none w-full rounded-sm ml-4 p-1 text-black ring-2 border-l-8" placeholder="Numero Cvv"
                 [ngClass]="{
-                            'ring-green-600':this.form.get('cvv')?.valid,
-                            'ring-red-600':this.form.get('cvv')?.invalid && this.form.get('titular')?.touched
+                    'border-green-700':cvvPassword.valid,
+                    'border-red-600':!cvvPassword.valid && cvvPassword.touched
                         }">
         </div>
-        <button [disabled]="this.form.invalid" [ngClass]="{
-                    'hover:bg-green-300':this.form.invalid
-                }" type="submit"
-            class=" cursor-pointer px-4 py-2 bg-gray-600 rounded-md text-white my-2 font-bold text-md w-full hover:bg-green-700">Agregar</button>
+        <button type="submit" [disabled]="!formCard.form.valid"
+            class="btn-active"
+            [ngClass]="{'btn-disable':!formCard.form.valid}"
+            >Agregar</button>
     </form>
 
 </div>

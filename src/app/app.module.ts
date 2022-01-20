@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +17,7 @@ import { TatjetaCreditoFormComponent } from './components/tatjeta-credito-form/t
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
+    FormsModule,
     CommonModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()

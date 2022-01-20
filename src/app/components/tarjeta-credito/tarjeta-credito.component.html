@@ -16,19 +16,19 @@
 
                 </thead>
                 <tbody>
-          <!--
+          
 
-              <tr *ngFor="let card of listCards">
+              <tr *ngFor="let card of listCards; let i = index">
                   
                   <td>{{card.titular}}</td>
-                  <td>{{card.numeroTarjeta}}</td>
+                  <td>{{card.numberCard}}</td>
                   <td>{{card.fechaExpedicion}}</td>
-                  <td>{{card.cvv}}</td>
-                  <td><i class="far text-cyan-500 fa-edit"></i></td>
-                  <td><i class="far text-red-500 fa-trash-alt"></i></td>
+                  <td>{{card.cvvPassword}}</td>
+                  <td><i class="far text-cyan-500 cursor-pointer fa-edit"></i></td>
+                  <td><i (click)="deleteCard(i)" class="far text-red-500 cursor-pointer fa-trash-alt"></i></td>
                   
                 </tr>
-            -->
+            
                 </tbody>
             </table>
         </div>
