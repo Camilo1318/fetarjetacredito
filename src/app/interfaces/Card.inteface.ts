@@ -1,6 +1,7 @@
 export interface Card{
+   id:number;
    titular:string;
-   numberCard:string;
-   fechaExpedicion:string;
+   numeroTarjeta:string;
+   fechaExpriracion:string;
    cvvPassword:string;
 }

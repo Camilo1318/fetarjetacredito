@@ -6,10 +6,14 @@
     <div class="flex flex-wrap justify-evenly space-x-3">
         <app-tatjeta-credito-form
             (Card)="addCard($event)"
+            [dataUpdate] ="dataUpdate" 
         ></app-tatjeta-credito-form>
-        <app-tarjeta-credito 
+        <app-tarjeta-credito-view 
             [listCards]="listCards"
             (indexCardForDelete)="deleteCard($event)"
-        ></app-tarjeta-credito>
+            (updateData)="updateCard($event)"
+        ></app-tarjeta-credito-view>
+
+       
     </div>
 </div>

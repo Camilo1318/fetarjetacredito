@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Card } from 'src/app/interfaces/Card.inteface';
 
@@ -9,10 +10,22 @@ import { Card } from 'src/app/interfaces/Card.inteface';
 })
 export class TatjetaCreditoFormComponent{
   
-  @Output() Card = new EventEmitter<Card>()
-
-  onSubmit({value:card}:NgForm){
-    console.log(card);
-    this.Card.emit(card)
+  model = {
+    id:0,
+    titular:'',
+    numeroTarjeta:'',
+    fechaExpriracion:'',
+    cvvPassword:''
   }
+
+  @Input() dataUpdate!:Card
+  @Output() Card = new EventEmitter<Card>()
+    
+  onSubmit(form:NgForm){
+    console.log(form.value.card);
+    this.Card.emit(form.value.card)
+    
+  }
+
+
 }

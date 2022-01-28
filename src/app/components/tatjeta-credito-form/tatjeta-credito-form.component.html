@@ -1,13 +1,12 @@
 <div class="text-center mt-8 p-4 rounded-md shadow-sm shadow-gray-500">
-    <h1 class="text-2xl text-gray-800 font-semibold my-4">Add Credit Card</h1>
-
+    <h1 class="text-2xl text-gray-800 font-semibold my-4">{{dataUpdate.id>0?'Edit':'Add'}} Credit Card</h1>
     <form type="submit" (ngSubmit)="onSubmit(formCard)" #formCard="ngForm">
         <div class="flex items-center p-2 text-md">
             <i class="fas fa-user" [ngClass]="{
                 'text-green-700':titular.valid,
                 'text-red-600':!titular.valid && titular.touched     
             }"></i>
-            <input type="text" ngModel="Cristian Camilo" name="titular" #titular="ngModel" required minlength="5"
+            <input type="text" name="titular" ngModel={{dataUpdate.titular}}  #titular="ngModel" required minlength="5"
                 class="outline-none w-full rounded-sm ml-4 p-1 text-black ring-2 border-l-8" placeholder="Nombre"
                 [ngClass]="{
                     'border-green-700':titular.valid,
@@ -16,26 +15,26 @@
         </div>
         <div class="flex p-2 items-center text-md">
             <i class="fas fa-credit-card" [ngClass]="{
-                'text-green-700':numberCard.valid,
-                'text-red-600':!numberCard.valid && numberCard.touched     
+                'text-green-700':numeroTarjeta.valid,
+                'text-red-600':!numeroTarjeta.valid && numeroTarjeta.touched     
                     }"></i>
-            <input type="text" ngModel="12345" name="numberCard" #numberCard="ngModel" required minlength="5" maxlength="5"
+            <input type="text" ngModel={{dataUpdate.numeroTarjeta}} name="numeroTarjeta" #numeroTarjeta="ngModel" required minlength="5" maxlength="5"
                 class="outline-none w-full rounded-sm ml-4 p-1 text-black ring-2 border-l-8"
                 placeholder="Numero Tarjeta" [ngClass]="{
-                    'border-green-700':numberCard.valid,
-                    'border-red-600':!numberCard.valid && numberCard.touched
+                    'border-green-700':numeroTarjeta.valid,
+                    'border-red-600':!numeroTarjeta.valid && numeroTarjeta.touched
                         }">
         </div>
         <div class="flex p-2 items-center text-md ">
             <i class="fas fa-calendar-alt" [ngClass]="{
-                'text-green-700':fechaExpedicion.valid,
-                'text-red-600':!fechaExpedicion.valid && fechaExpedicion.touched     
+                'text-green-700':fechaExpriracion.valid,
+                'text-red-600':!fechaExpriracion.valid && fechaExpriracion.touched     
                     }"></i>
-            <input type="text" ngModel="13/06/1995" name="fechaExpedicion" #fechaExpedicion="ngModel" required maxlength="10" minlength="10"
+            <input type="text" ngModel={{dataUpdate.fechaExpriracion}} name="fechaExpriracion" #fechaExpriracion="ngModel" required maxlength="10" minlength="10"
                 class="outline-none w-full rounded-sm ml-4 p-1 text-black ring-2 border-l-8" 
                 placeholder="Fecha Expedicion" [ngClass]="{
-                    'border-green-700':fechaExpedicion.valid,
-                    'border-red-600':!fechaExpedicion.valid && fechaExpedicion.touched
+                    'border-green-700':fechaExpriracion.valid,
+                    'border-red-600':!fechaExpriracion.valid && fechaExpriracion.touched
                         }">
         </div>
         <div class="flex p-2 items-center text-md ">
@@ -43,7 +42,7 @@
                 'text-green-700':cvvPassword.valid,
                 'text-red-600':!cvvPassword.valid && cvvPassword.touched    
                     }"></i>
-            <input type="password" ngModel="123" name="cvvPassword" #cvvPassword="ngModel" required maxlength="3" minlength="3"
+            <input type="password" ngModel={{dataUpdate.cvvPassword}} name="cvvPassword" #cvvPassword="ngModel" required maxlength="3" minlength="3"
                 class="outline-none w-full rounded-sm ml-4 p-1 text-black ring-2 border-l-8" placeholder="Numero Cvv"
                 [ngClass]="{
                     'border-green-700':cvvPassword.valid,
@@ -53,7 +52,10 @@
         <button type="submit" [disabled]="!formCard.form.valid"
             class="btn-active"
             [ngClass]="{'btn-disable':!formCard.form.valid}"
-            >Agregar</button>
+            >{{dataUpdate.id>0?'Update':'Send'}}</button>
+        <ng-template >
+            <button type="boton" class="btn-danger">Cancelar</button>
+        </ng-template>
     </form>
 
 </div>

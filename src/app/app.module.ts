@@ -4,15 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule} from '@angular/common/http'
 
 import { AppComponent } from './app.component';
-import { TarjetaCreditoComponent } from './components/tarjeta-credito/tarjeta-credito.component';
+import { TarjetaCreditoViewComponent } from './components/tarjeta-credito-view/tarjeta-credito.view.component';
 import { TatjetaCreditoFormComponent } from './components/tatjeta-credito-form/tatjeta-credito-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TarjetaCreditoComponent,
+    TarjetaCreditoViewComponent,
     TatjetaCreditoFormComponent,
   ],
   imports: [
@@ -20,7 +21,8 @@ import { TatjetaCreditoFormComponent } from './components/tatjeta-credito-form/t
     FormsModule,
     CommonModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

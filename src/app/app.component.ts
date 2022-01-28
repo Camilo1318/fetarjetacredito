@@ -1,38 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Card } from './interfaces/Card.inteface';
 import { ToastrService } from 'ngx-toastr';
+import { TarjetaService } from './services/tarjeta.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  constructor(private toastr: ToastrService){}
+  listCards: Card[] = [];
 
-  listCards: Card[] = [
-    {
-      cvvPassword: "123",
-      fechaExpedicion: "13/06/1995",
-      numberCard: "12345",
-      titular: "Cristian Camilo"
-    },
-    {
-      cvvPassword: "456",
-      fechaExpedicion: "20/06/1995",
-      numberCard: "00000",
-      titular: "Leito Sandoval"
-    }
-  ];
+  dataUpdate: Card = {
+      id: 0,
+      titular: '',
+      numeroTarjeta: '',
+      fechaExpriracion: '',
+      cvvPassword: '',
+  };
 
-  addCard(card: Card): void {
-    this.listCards.push(card)
-    this.toastr.success('La tarjeta se ha añadido exitosamente', 'Operacion Exitosa!');
+  constructor(private toastr: ToastrService, private getTarjetaSvc: TarjetaService) { }
+
+  ngOnInit(): void {
+    this.getTarjetas();
   }
 
-  deleteCard(index: number): void{
-    this.listCards.splice(index,1)
-    this.toastr.error('La tarjeta se ha eliminada exitosamente', 'Operacion Exitosa!');
+  getTarjetas(): void {
+    this.getTarjetaSvc.getListTarjetas().pipe(
+      tap(cards => this.listCards = cards),
+      tap(cards => console.log(cards)))
+      .subscribe()
+  }
 
+  addCard(card: Card): void {
+    this.getTarjetaSvc.saveTarjeta(card).pipe(
+      tap(res => {
+        this.toastr.success('La tarjeta se ha añadido exitosamente', 'Operacion Exitosa!')
+        this.getTarjetas();
+      })
+    ).subscribe()
+  }
+
+  deleteCard(index: number): void {
+    this.getTarjetaSvc.deleteTarjeta(index).pipe(
+      tap(res => {
+        this.toastr.error('La tarjeta se ha eliminada exitosamente', 'Operacion Exitosa!')
+        this.getTarjetas()
+      })
+    ).subscribe();
+
+  }
+
+  updateCard(updateData: Card) {
+    this.dataUpdate = updateData
   }
 }
