@@ -3,6 +3,7 @@ import { Card } from './interfaces/Card.inteface';
 import { ToastrService } from 'ngx-toastr';
 import { TarjetaService } from './services/tarjeta.service';
 import { tap } from 'rxjs';
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-root',
@@ -54,5 +55,22 @@ export class AppComponent implements OnInit {
 
   updateCard(updateData: Card) {
     this.dataUpdate = updateData
+  }
+
+  updateCardData(cardUpdate:Card){
+    console.log(cardUpdate);
+    this.getTarjetaSvc.updateTarjeta(cardUpdate.id, cardUpdate).pipe(
+      tap(res =>{
+        this.toastr.success('La tarjeta ha sido actualizada exitosamente', 'Operacion Exitosa!')
+        this.getTarjetas()
+        this.dataUpdate = {
+          id: 0,
+          titular: '',
+          numeroTarjeta: '',
+          fechaExpriracion: '',
+          cvvPassword: '',
+      };
+      })
+    ).subscribe()
   }
 }

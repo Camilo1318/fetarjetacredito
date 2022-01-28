@@ -1,4 +1,4 @@
-<div class=" flex justify-between font-bold text-white text-2xl bg-green-700 p-4 shadow-sm shadow-green-400">
+<div class=" flex justify-between font-bold text-white text-2xl bg-gradient-to-r from-black to-blue-700 p-4 shadow-sm shadow-green-400">
     <h1>Tajertas de Credito App</h1>
     <i class="fa fa-home"></i>
 </div>
@@ -6,6 +6,7 @@
     <div class="flex flex-wrap justify-evenly space-x-3">
         <app-tatjeta-credito-form
             (Card)="addCard($event)"
+            (updateCard)="updateCardData($event)"
             [dataUpdate] ="dataUpdate" 
         ></app-tatjeta-credito-form>
         <app-tarjeta-credito-view 

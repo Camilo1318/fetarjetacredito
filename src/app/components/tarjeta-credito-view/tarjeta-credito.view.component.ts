@@ -18,9 +18,7 @@ export class TarjetaCreditoViewComponent{
   }
 
   updateCard(card: Card){
-
     this.updateData.emit(card)
-
   }
 
 }

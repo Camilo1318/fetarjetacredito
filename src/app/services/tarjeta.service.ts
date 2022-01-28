@@ -26,7 +26,7 @@ export class TarjetaService {
   }
 
   updateTarjeta(id:number, card:Card): Observable<any>{
-    return this.http.post(this.myAppUrl + this.myApiUrl+id,card)
+    return this.http.put(this.myAppUrl + this.myApiUrl+id,card)
   }
 
 }

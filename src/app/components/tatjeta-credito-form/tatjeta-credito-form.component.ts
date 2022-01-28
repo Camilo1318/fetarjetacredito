@@ -20,11 +20,26 @@ export class TatjetaCreditoFormComponent{
 
   @Input() dataUpdate!:Card
   @Output() Card = new EventEmitter<Card>()
+  @Output() updateCard = new EventEmitter<Card>()
     
-  onSubmit(form:NgForm){
-    console.log(form.value.card);
-    this.Card.emit(form.value.card)
+  onSubmit(form:NgForm,{value:card}:NgForm, action:boolean){
     
+    form.reset()
+    
+    if(action){
+      console.log("Entra aqui", card);
+      this.updateCard.emit({...card,id:this.dataUpdate.id})
+      return
+    }
+    this.Card.emit(card) 
+
+  }
+
+  cancelUpdate(form:NgForm){
+    this.dataUpdate.id = 0;
+    form.reset()
+    console.log(form);
+
   }
 
 

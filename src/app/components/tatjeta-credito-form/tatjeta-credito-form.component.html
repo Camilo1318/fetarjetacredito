@@ -1,6 +1,6 @@
 <div class="text-center mt-8 p-4 rounded-md shadow-sm shadow-gray-500">
     <h1 class="text-2xl text-gray-800 font-semibold my-4">{{dataUpdate.id>0?'Edit':'Add'}} Credit Card</h1>
-    <form type="submit" (ngSubmit)="onSubmit(formCard)" #formCard="ngForm">
+    <form type="submit" (ngSubmit)="dataUpdate.id>0 ? onSubmit(formCard,formCard,true):onSubmit(formCard,formCard,false)" #formCard="ngForm">
         <div class="flex items-center p-2 text-md">
             <i class="fas fa-user" [ngClass]="{
                 'text-green-700':titular.valid,
@@ -49,13 +49,17 @@
                     'border-red-600':!cvvPassword.valid && cvvPassword.touched
                         }">
         </div>
-        <button type="submit" [disabled]="!formCard.form.valid"
+
+        <div class="flex justify-center items-center w-full">
+            <button type="submit" [disabled]="!formCard.form.valid"
             class="btn-active"
             [ngClass]="{'btn-disable':!formCard.form.valid}"
             >{{dataUpdate.id>0?'Update':'Send'}}</button>
-        <ng-template >
-            <button type="boton" class="btn-danger">Cancelar</button>
-        </ng-template>
+            <div *ngIf="dataUpdate.id != 0">
+                <button (click)="cancelUpdate(formCard)" type="button" class="btn-danger">Cancelar</button>
+            </div>
+        </div>
+        
     </form>
 
 </div>
